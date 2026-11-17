@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}Controle de Estoque{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>📦 Controle de Estoque</h1>
+    <nav>
+      <a href="{{ url_for('main.index') }}">Início</a>
+      <a href="{{ url_for('produtos.listar') }}">Produtos</a>
+      <a href="{{ url_for('categorias.listar') }}">Categorias</a>
+      <a href="{{ url_for('movimentacoes.nova') }}">Movimentar</a>
+      <a href="{{ url_for('movimentacoes.historico') }}">Histórico</a>
+    </nav>
+  </header>
+  <main>
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+      {% for categoria, texto in mensagens %}
+        <div class="aviso {{ categoria }}" role="alert">{{ texto }}</div>
+      {% endfor %}
+    {% endwith %}
+    {% block conteudo %}{% endblock %}
+  </main>
+  <footer>Projeto Integrador Transdisciplinar em Engenharia de Software II</footer>
+</body>
+</html>

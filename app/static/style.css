@@ -1,0 +1,24 @@
+:root{--cor:#0f766e;--bg:#f4f6f8;--txt:#1f2933}
+*{box-sizing:border-box}
+body{font-family:Arial,Helvetica,sans-serif;margin:0;background:var(--bg);color:var(--txt)}
+header{background:var(--cor);color:#fff;padding:12px 24px}
+header h1{margin:0 0 8px;font-size:1.4rem}
+nav a{color:#fff;margin-right:16px;text-decoration:none;font-weight:bold}
+nav a:hover{text-decoration:underline}
+main{max-width:960px;margin:24px auto;padding:0 16px}
+footer{text-align:center;color:#6b7280;font-size:.8rem;padding:24px}
+table{width:100%;border-collapse:collapse;background:#fff;margin-top:12px}
+th,td{padding:10px;border-bottom:1px solid #e5e7eb;text-align:left}
+th{background:#e6f2f1}
+tr.alerta td{background:#fff7ed}
+.linha{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0}
+.coluna{display:flex;flex-direction:column;gap:12px;max-width:420px}
+label{display:flex;flex-direction:column;gap:4px;font-weight:bold}
+input,select{padding:8px;border:1px solid #cbd2d9;border-radius:4px;font-size:1rem}
+button,.btn{background:var(--cor);color:#fff;border:0;border-radius:4px;padding:8px 14px;cursor:pointer;text-decoration:none;font-size:1rem}
+.btn.secundario{background:#6b7280}
+button.perigo{background:#b91c1c}
+form.inline{display:inline}
+.aviso{padding:10px 14px;border-radius:4px;margin-bottom:12px}
+.aviso.ok{background:#dcfce7;color:#166534}
+.aviso.erro{background:#fee2e2;color:#991b1b}

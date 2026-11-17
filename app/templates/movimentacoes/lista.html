@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>Histórico de movimentações</h2>
+{% if movimentacoes %}
+<table>
+  <tr><th>Data/hora</th><th>Produto</th><th>Tipo</th><th>Qtd.</th><th>Observação</th></tr>
+  {% for m in movimentacoes %}
+  <tr><td>{{ m.data_hora.strftime('%d/%m/%Y %H:%M') }}</td><td>{{ m.produto.nome }}</td>
+      <td>{{ 'Entrada' if m.tipo == 'ENTRADA' else 'Saída' }}</td><td>{{ m.quantidade }}</td><td>{{ m.observacao or '-' }}</td></tr>
+  {% endfor %}
+</table>
+{% else %}<p>Nenhuma movimentação registrada.</p>{% endif %}
+{% endblock %}

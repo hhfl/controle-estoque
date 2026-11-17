@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>Painel</h2>
+<p>Produtos cadastrados: <strong>{{ total }}</strong></p>
+<h3>⚠️ Produtos com estoque baixo</h3>
+{% if em_alerta %}
+<table>
+  <tr><th>Produto</th><th>Atual</th><th>Mínimo</th></tr>
+  {% for p in em_alerta %}
+  <tr><td>{{ p.nome }}</td><td>{{ p.quantidade }}</td><td>{{ p.estoque_minimo }}</td></tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>Nenhum produto abaixo do estoque mínimo.</p>
+{% endif %}
+{% endblock %}

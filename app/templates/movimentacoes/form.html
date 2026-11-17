@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>Registrar movimentação</h2>
+<form method="post" class="coluna">
+  <label>Produto
+    <select name="produto_id" required>
+      <option value="">Selecione...</option>
+      {% for p in produtos %}
+      <option value="{{ p.id }}" {{ 'selected' if form.get('produto_id') == p.id|string }}>{{ p.nome }} (estoque: {{ p.quantidade }})</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Tipo
+    <select name="tipo" required>
+      <option value="ENTRADA" {{ 'selected' if form.get('tipo') == 'ENTRADA' }}>Entrada (compra/reposição)</option>
+      <option value="SAIDA" {{ 'selected' if form.get('tipo') == 'SAIDA' }}>Saída (venda/baixa)</option>
+    </select>
+  </label>
+  <label>Quantidade <input type="number" name="quantidade" min="1" required value="{{ form.get('quantidade', '') }}"></label>
+  <label>Observação (opcional) <input name="observacao" maxlength="200" value="{{ form.get('observacao', '') }}"></label>
+  <div class="linha"><button>Registrar</button></div>
+</form>
+{% endblock %}

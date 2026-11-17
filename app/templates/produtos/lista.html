@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>Produtos</h2>
+<form method="get" class="linha">
+  <input type="search" name="q" value="{{ busca }}" placeholder="Buscar por nome ou código">
+  <button>Buscar</button>
+  <a class="btn" href="{{ url_for('produtos.novo') }}">+ Novo produto</a>
+</form>
+{% if produtos %}
+<table>
+  <tr><th>Código</th><th>Nome</th><th>Categoria</th><th>Preço</th><th>Estoque</th><th>Ações</th></tr>
+  {% for p in produtos %}
+  <tr class="{{ 'alerta' if p.estoque_baixo }}">
+    <td>{{ p.sku }}</td><td>{{ p.nome }}</td><td>{{ p.categoria.nome }}</td>
+    <td>R$ {{ '%.2f'|format(p.preco)|replace('.', ',') }}</td>
+    <td>{{ p.quantidade }}{% if p.estoque_baixo %} ⚠️{% endif %}</td>
+    <td>
+      <a href="{{ url_for('produtos.editar', produto_id=p.id) }}">Editar</a>
+      <form method="post" action="{{ url_for('produtos.excluir', produto_id=p.id) }}" class="inline"
+            onsubmit="return confirm('Excluir este produto? Esta ação não pode ser desfeita.')">
+        <button class="perigo">Excluir</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>Nenhum produto encontrado.</p>
+{% endif %}
+{% endblock %}

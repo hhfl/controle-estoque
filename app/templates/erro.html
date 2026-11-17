@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h2>Erro {{ codigo }}</h2>
+<p>{{ mensagem }}</p>
+<p><a class="btn" href="{{ url_for('main.index') }}">Voltar ao início</a></p>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% macro v(campo, padrao='') %}{{ form.get(campo, (produto[campo] if produto else padrao)) }}{% endmacro %}
+{% block conteudo %}
+<h2>{{ 'Editar produto' if produto else 'Novo produto' }}</h2>
+<form method="post" class="coluna">
+  <label>Nome <input name="nome" maxlength="100" required value="{{ v('nome') }}"></label>
+  <label>Código (SKU) <input name="sku" maxlength="30" required value="{{ v('sku') }}"></label>
+  <label>Preço (R$) <input name="preco" required inputmode="decimal" value="{{ v('preco') }}"></label>
+  <label>Quantidade em estoque <input type="number" name="quantidade" min="0" value="{{ v('quantidade', 0) }}"></label>
+  <label>Estoque mínimo <input type="number" name="estoque_minimo" min="0" value="{{ v('estoque_minimo', 0) }}"></label>
+  <label>Categoria
+    <select name="categoria_id" required>
+      <option value="">Selecione...</option>
+      {% set atual = (form.get('categoria_id') or (produto.categoria_id if produto else ''))|string %}
+      {% for c in categorias %}
+      <option value="{{ c.id }}" {{ 'selected' if c.id|string == atual }}>{{ c.nome }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <div class="linha"><button>Salvar</button><a class="btn secundario" href="{{ url_for('produtos.listar') }}">Cancelar</a></div>
+</form>
+{% endblock %}
